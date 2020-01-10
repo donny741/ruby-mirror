@@ -7,7 +7,7 @@ Dir[Dir.pwd + '/**/*.rb'].each { |f| require f }
 
 @default_font = 'app/assets/fonts/maison.otf'
 SCALE = 0.4
-MAX_TICK = 360
+MAX_TICK = 720
 
 resolution = Resolution.new(scale: SCALE)
 grid = Grid.new(x: resolution.width,
@@ -16,23 +16,26 @@ grid = Grid.new(x: resolution.width,
                 cols: 12)
 
 set title: 'Ruby Mirror',
-    background: 'black',
+    background: '#000000',
     fullscreen: false,
     height: resolution.height,
     width: resolution.width,
     resizeable: false,
     diagnostics: true
 
-time = Components::CurrentTime.new(grid.start_coordinates(x: 2, y: 2))
-compliments = Components::Compliments.new(grid.start_coordinates(x: 3, y: 11))
+time = Components::CurrentTime.new(grid.start_cell(x: 2, y: 2))
+compliments = Components::Compliments.new(grid.start_cell(x: 3, y: 11)
+                                          .merge(container_width: grid.x))
 tick = 0
 update do
-  if tick % 10 == 0
-    time.update
-  end
+  time.update if tick % 10 == 0
+  compliments.update if tick % 360 == 0
 
-  if tick % 120 == 0
-    compliments.update
+  if compliments.state == 0
+    compliments.object.opacity += 0.01 if compliments.object.opacity <= 1.0
+  end
+  if compliments.state == 2
+    compliments.object.opacity -= 0.01 if compliments.object.opacity >= 0.0
   end
 
   tick = 0 if tick == MAX_TICK
