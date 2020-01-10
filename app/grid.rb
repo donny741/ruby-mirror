@@ -15,7 +15,7 @@ class Grid
     @y_offset = y_offset
   end
 
-  def start_coordinates(x:, y:)
+  def start_cell(x:, y:)
     {
       x: x_offset + cell_width * (x - 1),
       y: y_offset + cell_height * (y - 1)
