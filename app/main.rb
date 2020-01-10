@@ -6,7 +6,8 @@ require 'pry'
 Dir[Dir.pwd + '/**/*.rb'].each { |f| require f }
 
 @default_font = 'app/assets/fonts/maison.otf'
-SCALE = 1
+SCALE = 0.4
+MAX_TICK = 360
 
 resolution = Resolution.new(scale: SCALE)
 grid = Grid.new(x: resolution.width,
@@ -24,8 +25,14 @@ set title: 'Ruby Mirror',
 
 time = Components::CurrentTime.new(grid.start_coordinates(x: 2, y: 2))
 
+tick = 0
 update do
-  time.update
+  if tick % 60 == 0
+    time.update
+  end
+
+  tick = 0 if tick == MAX_TICK
+  tick += 1
 end
 
 on :key do |e|
