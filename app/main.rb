@@ -27,7 +27,7 @@ time = Components::CurrentTime.new(grid.start_coordinates(x: 2, y: 2))
 
 tick = 0
 update do
-  if tick % 20 == 0
+  if tick % 10 == 0
     time.update
   end
 
