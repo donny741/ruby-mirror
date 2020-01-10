@@ -2,24 +2,33 @@
 
 module Components
   class CurrentTime
-    attr_reader :opts, :object
+    attr_reader :opts
 
     def initialize(opts)
       @opts = opts
-      @object = create_text
+      object
+      seconds
+
+      update
     end
 
     def update
-      @object.remove
-      @object = create_text
-      @object.add
+      object.remove
+      seconds.remove
+
+      object.text = hrs_mins
+      seconds.text = secs
+      seconds.y = opts[:y] + 2.vh
+
+      seconds.add
+      object.add
     end
 
     private
 
-    def create_text
-      Text.new(
-        formatted_time,
+    def object
+      @object ||= Text.new(
+        hrs_mins,
         {
           font: @default_font,
           size: 10.vh,
@@ -28,8 +37,23 @@ module Components
       )
     end
 
-    def formatted_time
-      Time.now.strftime('%H:%M:%S')
+    def seconds
+      @seconds ||= Text.new(
+        secs,
+        font: @default_font,
+        size: 5.vh,
+        color: 'white',
+        y: opts[:y] + 1.vw,
+        x: opts[:x] + object.width
+      )
+    end
+
+    def hrs_mins
+      Time.now.strftime('%H:%M')
+    end
+
+    def secs
+      Time.now.strftime('%S')
     end
   end
 end
