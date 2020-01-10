@@ -24,11 +24,15 @@ set title: 'Ruby Mirror',
     diagnostics: true
 
 time = Components::CurrentTime.new(grid.start_coordinates(x: 2, y: 2))
-
+compliments = Components::Compliments.new(grid.start_coordinates(x: 3, y: 11))
 tick = 0
 update do
   if tick % 10 == 0
     time.update
+  end
+
+  if tick % 120 == 0
+    compliments.update
   end
 
   tick = 0 if tick == MAX_TICK
