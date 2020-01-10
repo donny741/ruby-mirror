@@ -5,10 +5,6 @@ require 'pry'
 
 Dir[Dir.pwd + '/**/*.rb'].each { |f| require f }
 
-@default_font = 'app/assets/fonts/maison.otf'
-SCALE = 0.4
-MAX_TICK = 720
-
 resolution = Resolution.new(scale: SCALE)
 grid = Grid.new(x: resolution.width,
                 y: resolution.height,
