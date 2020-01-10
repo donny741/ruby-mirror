@@ -2,6 +2,7 @@
 
 require 'ruby2d'
 require 'pry'
+require 'dotenv/load'
 
 Dir[Dir.pwd + '/**/*.rb'].each { |f| require f }
 
