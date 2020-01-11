@@ -36,7 +36,7 @@ module Components
         e = events&.map do |event|
           row += 1.2
           Text.new(
-            event.summary,
+            event.summary.encode('iso-8859-4'),
             font: DEFAULT_FONT,
             size: 3.vh,
             color: 'white',
