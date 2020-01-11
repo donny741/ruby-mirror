@@ -39,7 +39,7 @@ module Components
     def seconds
       @seconds ||= Text.new(
         secs,
-        font: @default_font,
+        font: DEFAULT_FONT,
         size: 5.vh,
         color: 'white',
         y: opts[:y] + 1.vw,
