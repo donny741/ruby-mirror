@@ -2,11 +2,6 @@
 
 module Components
   class Calendar < Components::BaseComponent
-    def initialize(opts)
-      super
-      title
-    end
-
     def update
       event_cells.each(&:remove)
       event_cells.each(&:add)
@@ -26,8 +21,9 @@ module Components
     end
 
     def event_cells
+      p 'RENDERING CALENDAR'
       row = 1
-      event_groups.map do |date, events|
+      @event_cells ||= event_groups.map do |date, events|
         row += 1 unless event_groups[0][0] == date
         Text.new(
           date,
@@ -54,7 +50,7 @@ module Components
     end
 
     def event_groups
-      Components::Calendars::Parse.get_upcomming_events
+      @event_groups ||= Components::Calendars::Parse.get_upcomming_events
     end
   end
 end

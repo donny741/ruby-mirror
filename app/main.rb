@@ -32,9 +32,9 @@ COMPONENTS = [
   },
   {
     class: 'Calendar',
-    disabled: true,
+    disabled: false,
     options: {
-      pdate_interval: 1440,
+      update_interval: 2880,
     }.merge!(GRID.start_cell(x: 2, y: 3))
   }
 ].freeze
@@ -65,7 +65,6 @@ update do
     compliments.object.opacity -= 0.01 if compliments.object.opacity >= 0.0
   end
 
-  tick = 0 if tick == MAX_TICK
   tick += 1
 end
 
