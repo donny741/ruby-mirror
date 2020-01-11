@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 module Components
-  class CurrentTime
-    attr_reader :opts
-
+  class CurrentTime < Components::BaseComponent
     def initialize(opts)
-      @opts = opts
+      super
+
       object
       seconds
 

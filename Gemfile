@@ -1,2 +1,4 @@
-gem 'ruby2d'
 gem 'dotenv'
+gem 'icalendar'
+gem 'ruby2d'
+gem 'faraday'

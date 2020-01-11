@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Components
-  class Compliments
-    attr_reader :opts
+  class Compliments < Components::BaseComponent
     attr_accessor :state
 
     COPMLIMENTS = [
@@ -16,8 +15,9 @@ module Components
     ].freeze
 
     def initialize(opts)
+      super
+
       @counter = 0
-      @opts = opts
       @state = 0 # 0 - fading-in, 1 - visible, 2 - fading-out
 
       update
