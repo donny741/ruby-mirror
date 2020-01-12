@@ -22,10 +22,10 @@ module Components
       end
 
       def swap_titles(event_group)
-        event_group[0] = case event_group[0]
-                         when Date.today
+        event_group[0] = case event_group[0].to_s
+                         when Date.today.to_s
                            'Today'
-                         when Date.today + 1
+                         when (Date.today + 1).to_s
                            'Tomorrow'
                          else
                            event_group[0]
