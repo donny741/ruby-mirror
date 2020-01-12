@@ -30,7 +30,7 @@ COMPONENTS = [
     class: 'Calendar',
     disabled: false,
     options: {
-      update_interval: 2880,
+      update_interval: 11520,
     }.merge!(GRID.start_cell(x: 2, y: 3))
   }
 ].freeze

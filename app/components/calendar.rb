@@ -4,6 +4,7 @@ module Components
   class Calendar < Components::BaseComponent
     def update
       event_cells.each(&:remove)
+      @event_cells = nil
       event_cells.each(&:add)
     end
 
@@ -49,7 +50,7 @@ module Components
     end
 
     def event_groups
-      @event_groups ||= Components::Calendars::Parse.get_upcomming_events
+      Components::Calendars::Parse.get_upcomming_events
     end
   end
 end
