@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Integer
+class Numeric
   def vh
     (Window.width * (to_f / 100)).to_i
   end
