@@ -21,7 +21,6 @@ module Components
     end
 
     def event_cells
-      p 'RENDERING CALENDAR'
       row = 1
       @event_cells ||= event_groups.map do |date, events|
         row += 1 unless event_groups[0][0] == date

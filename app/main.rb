@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'ruby2d'
-require 'pry'
-require 'dotenv/load'
-
 require_relative './components/base_component'
 Dir[Dir.pwd + '/**/*.rb'].each { |f| require f }
 
