@@ -19,7 +19,6 @@ module Components
       seconds.text = secs
       seconds.y = opts[:y] + 1.vh
       seconds.x = opts[:x] + object.width - substract_ones(object.text).vw
-      p "substracting #{substract_ones(object.text).vw}"
 
       seconds.add
       object.add
