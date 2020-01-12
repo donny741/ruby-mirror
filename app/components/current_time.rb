@@ -18,6 +18,8 @@ module Components
       object.text = hrs_mins
       seconds.text = secs
       seconds.y = opts[:y] + 1.vh
+      seconds.x = opts[:x] + object.width - substract_ones(object.text).vw
+      p "substracting #{substract_ones(object.text).vw}"
 
       seconds.add
       object.add
@@ -42,8 +44,7 @@ module Components
         font: DEFAULT_FONT,
         size: 5.vh,
         color: 'white',
-        y: opts[:y] + 1.vw,
-        x: opts[:x] + object.width
+        y: opts[:y] + 1.vw
       )
     end
 
@@ -53,6 +54,10 @@ module Components
 
     def secs
       Time.now.strftime('%S')
+    end
+
+    def substract_ones(text)
+      text.chars.count('1').to_f / 10
     end
   end
 end
