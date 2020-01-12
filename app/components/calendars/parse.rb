@@ -5,28 +5,41 @@ module Components
     module Parse
       module_function
 
-      DATES = [Date.today, Date.today + 1, Date.today + 2, Date.today + 3].freeze
+      CALENDAR_ID = 'donatas.povilaitis@vinted.com'
+      # CALENDAR_ID = 'friendlyfashion.co.uk_9f8sco84m2tkl1rfr715go6hug@group.calendar.google.com'
 
       def get_upcomming_events
-        response = Faraday.get ICAL_URL
-        cals = Icalendar::Calendar.parse(response.body)
-        cal = cals.first
+        service = Google::Apis::CalendarV3::CalendarService.new
+        service.authorization = Googles.get_authorizer
 
-        events = cal.events.select { |e| DATES.map(&:to_s).include? e.dtstart.to_date.to_s }
-        events.group_by { |e| e.dtstart.to_date }.map(&method(:swap_titles))
+        events = service.list_events(CALENDAR_ID,
+                                     single_events: true,
+                                     order_by: 'startTime',
+                                     time_min: DateTime.now.rfc3339,
+                                     time_max: time_max.rfc3339).items
+        events.group_by { |e| e.start.date || e.start.date_time.to_date.to_s }
+              .map(&method(:swap_titles))
       end
 
       def swap_titles(event_group)
-        case event_group[0].to_date
-        when Date.today
-          event_group[0] = 'Today'
-        when Date.today + 1
-          event_group[0] = 'Tomorrow'
-        else
-          event_group[0] = event_group[0].to_date.strftime
-        end
+        event_group[0] = case event_group[0]
+                         when Date.today
+                           'Today'
+                         when Date.today + 1
+                           'Tomorrow'
+                         else
+                           event_group[0]
+                         end
 
         event_group
+      end
+
+      def time_max
+        if Date.today.saturday? || Date.today.sunday?
+          Date.today.next_week.end_of_week
+        else
+          Date.today.end_of_week
+        end
       end
     end
   end
