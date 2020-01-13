@@ -15,7 +15,6 @@ COMPONENTS = [
     disabled: false,
     options: {
       update_interval: 10,
-      font: DEFAULT_FONT
     }.merge!(GRID.start_cell(x: 2, y: 2))
   },
   {

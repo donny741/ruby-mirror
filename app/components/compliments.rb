@@ -37,7 +37,6 @@ module Components
       @object ||= Text.new(
         get_compliment,
         {
-          font: DEFAULT_FONT,
           size: 3.vw,
           color: 'white',
           opacity: 0

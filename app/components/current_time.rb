@@ -30,7 +30,6 @@ module Components
       @object ||= Text.new(
         hrs_mins,
         {
-          font: DEFAULT_FONT,
           size: 10.vh,
           color: 'white'
         }.merge!(opts)
@@ -40,7 +39,6 @@ module Components
     def seconds
       @seconds ||= Text.new(
         secs,
-        font: DEFAULT_FONT,
         size: 5.vh,
         color: 'white',
         y: opts[:y] + 1.vw

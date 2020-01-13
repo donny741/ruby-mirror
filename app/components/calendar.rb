@@ -20,7 +20,6 @@ module Components
         row += 1 unless event_groups[0][0] == date
         event_titles << Text.new(
           date,
-          font: DEFAULT_FONT,
           size: 4.vh,
           color: 'white',
           x: opts[:x],
@@ -30,7 +29,6 @@ module Components
           row += 1.2
           Text.new(
             event.summary.force_encoding('utf-8').encode('iso-8859-4'),
-            font: DEFAULT_FONT,
             size: 3.vh,
             color: 'white',
             x: opts[:x],
