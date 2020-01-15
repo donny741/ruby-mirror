@@ -29,14 +29,15 @@ COMPONENTS = [
     class: 'Calendar',
     disabled: false,
     options: {
-      update_interval: 11520,
+      update_interval: 11_520,
+      play_with_fire: true,
+      y_offset: 2.vh
     }.merge!(GRID.start_cell(x: 2, y: 3))
   },
   {
     class: 'List',
     disabled: true,
     options: {
-      update_interval: 10000,
       row_count: 1,
       rows: [
         {

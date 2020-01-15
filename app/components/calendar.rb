@@ -10,8 +10,12 @@ module Components
     private
 
     def clear_list
-      # this is very sketchy...
-      list_items.each(&:remove_and_free_text)
+      list_items.each(&method(:remove))
+    end
+
+    def remove(item)
+      # you can't remove items from @list_items because the fire will spread
+      item.send opts[:play_with_fire] ? :remove_and_free_text : :remove
     end
 
     def list_items
@@ -19,7 +23,7 @@ module Components
     end
 
     def update_list
-      y_offset = 0
+      y_offset = opts[:y_offset] || 0
       event_groups.flatten.each do |event|
         case event
         when String
@@ -29,7 +33,7 @@ module Components
                                  x: opts[:x],
                                  y: opts[:y] + y_offset + 1.vh)
           y_offset += 8.vh
-        when Google::Apis::CalendarV3::Event
+        when Object
           list_items << Text.new(event.summary,
                                  size: 3.vh,
                                  color: 'white',
