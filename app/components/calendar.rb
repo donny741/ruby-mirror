@@ -3,45 +3,41 @@
 module Components
   class Calendar < Components::BaseComponent
     def update
-      event_cells.each(&:remove)
-      event_titles.each(&:remove)
-
-      @event_cells = nil
-      @event_titles = nil
-
-      event_cells.each(&:add)
+      clear_list
+      update_list
     end
 
     private
 
-    def event_cells
-      row = 1
-      @event_cells ||= event_groups.map do |date, events|
-        row += 1 unless event_groups[0][0] == date
-        event_titles << Text.new(
-          date,
-          size: 4.vh,
-          color: 'white',
-          x: opts[:x],
-          y: opts[:y] + 8.vh + 4.vh * row
-        )
-        e = events&.map do |event|
-          row += 1.2
-          Text.new(
-            event.summary.force_encoding('utf-8').encode('iso-8859-4'),
-            size: 3.vh,
-            color: 'white',
-            x: opts[:x],
-            y: opts[:y] + 9.vh + 4.vh * row
-          )
-        end
-        row += 1
-        e
-      end.flatten.compact
+    def clear_list
+      # this is very sketchy...
+      list_items.each(&:remove_and_free_text)
     end
 
-    def event_titles
-      @event_titles ||= []
+    def list_items
+      @list_items ||= []
+    end
+
+    def update_list
+      y_offset = 0
+      event_groups.flatten.each do |event|
+        case event
+        when String
+          list_items << Text.new(event,
+                                 size: 4.vh,
+                                 color: 'white',
+                                 x: opts[:x],
+                                 y: opts[:y] + y_offset + 1.vh)
+          y_offset += 8.vh
+        when Google::Apis::CalendarV3::Event
+          list_items << Text.new(event.summary,
+                                 size: 3.vh,
+                                 color: 'white',
+                                 x: opts[:x],
+                                 y: opts[:y] + y_offset)
+          y_offset += 6.vh
+        end
+      end
     end
 
     def event_groups
