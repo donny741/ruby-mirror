@@ -35,6 +35,16 @@ COMPONENTS = [
     }.merge!(GRID.start_cell(x: 2, y: 3))
   },
   {
+    class: 'Weather',
+    disabled: false,
+    options: {
+      update_interval: 11_880,
+      open_weather_api_key: OPEN_WEATHER_API_KEY,
+      city: 'Vilnius',
+      country_code: 'lt'
+    }.merge!(GRID.start_cell(x: 8, y: 2))
+  },
+  {
     class: 'List',
     disabled: true,
     options: {
