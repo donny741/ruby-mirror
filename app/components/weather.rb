@@ -4,30 +4,57 @@ module Components
   class Weather < Components::BaseComponent
     def update
       @weather = weather_info
-      temp_object.text = temperature
+      temp_object.text = temperature_description
+
+      state_object.remove
+      wind_object.remove
+      feels_like_object.remove
+
       state_object.text = state_description
+      state_object.x = opts[:x] + temp_object.width + 1.vh
+      feels_like_object.text = feels_like_description
+      feels_like_object.x = opts[:x] + temp_object.width + 1.2.vh
+      wind_object.text = wind_description
+      wind_object.x = opts[:x] + temp_object.width + 1.2.vh
+
+      state_object.add
+      wind_object.add
+      feels_like_object.add
     end
 
     private
 
     def temp_object
-      @temp_text ||= Text.new('',
-        x: opts[:x],
-        y: opts[:y],
-        size: 16.vh
-      )
+      @temp_object ||= Text.new('',
+                                x: opts[:x],
+                                y: opts[:y],
+                                size: 10.vh)
     end
 
     def state_object
       @state_object ||= Text.new('',
-        x: opts[:x] + temp_object.width,
-        y: opts[:y] + 3.vh,
-        size: 4.vh
-      )
+                                 y: opts[:y] + 1.5.vh,
+                                 size: 4.vh)
     end
 
-    def temperature
+    def feels_like_object
+      @feels_like_object ||= Text.new('',
+                                      y: opts[:y] + 6.4.vh,
+                                      size: 2.vh)
+    end
+
+    def wind_object
+      @wind_object ||= Text.new('',
+                                y: opts[:y] + 8.3.vh,
+                                size: 2.vh)
+    end
+
+    def temperature_description
       temp = @weather['main']['temp'].to_f.round.to_i
+      temp_to_string(temp)
+    end
+
+    def temp_to_string(temp)
       if temp.positive?
         "+#{temp}"
       elsif temp.zero?
@@ -39,6 +66,15 @@ module Components
 
     def state_description
       @weather['weather'][0]['main']
+    end
+
+    def feels_like_description
+      temp = @weather['main']['feels_like'].to_f.round.to_i
+      'Feels like ' + temp_to_string(temp)
+    end
+
+    def wind_description
+      "Wind #{@weather['wind']['speed'].to_f.round.to_i} m/s"
     end
 
     def weather_info
