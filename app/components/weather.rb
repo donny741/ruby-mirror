@@ -28,24 +28,24 @@ module Components
       @temp_object ||= Text.new('',
                                 x: opts[:x],
                                 y: opts[:y],
-                                size: 10.vh)
+                                size: 12.vh)
     end
 
     def state_object
       @state_object ||= Text.new('',
-                                 y: opts[:y] + 1.5.vh,
+                                 y: opts[:y] + 1.8.vh,
                                  size: 4.vh)
     end
 
     def feels_like_object
       @feels_like_object ||= Text.new('',
-                                      y: opts[:y] + 6.4.vh,
+                                      y: opts[:y] + 6.9.vh,
                                       size: 2.vh)
     end
 
     def wind_object
       @wind_object ||= Text.new('',
-                                y: opts[:y] + 8.3.vh,
+                                y: opts[:y] + 9.6.vh,
                                 size: 2.vh)
     end
 
@@ -57,10 +57,8 @@ module Components
     def temp_to_string(temp)
       if temp.positive?
         "+#{temp}"
-      elsif temp.zero?
-        temp.to_s
       else
-        "-#{temp}"
+        temp.to_s
       end
     end
 
