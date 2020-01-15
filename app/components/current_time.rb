@@ -17,7 +17,7 @@ module Components
 
       object.text = hrs_mins
       seconds.text = secs
-      seconds.y = opts[:y] + 1.vh
+      seconds.y = opts[:y] + 1.2.vh
       seconds.x = opts[:x] + object.width - substract_ones(object.text).vw
 
       seconds.add
