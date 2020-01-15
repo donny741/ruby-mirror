@@ -31,6 +31,23 @@ COMPONENTS = [
     options: {
       update_interval: 11520,
     }.merge!(GRID.start_cell(x: 2, y: 3))
+  },
+  {
+    class: 'List',
+    disabled: true,
+    options: {
+      update_interval: 10000,
+      row_count: 1,
+      rows: [
+        {
+          text: 'New row',
+          size: 2.vh,
+          color: 'white',
+          x: 2.vh,
+          y: 2.vh
+        }
+      ]
+    }
   }
 ].freeze
 
