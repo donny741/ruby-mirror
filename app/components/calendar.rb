@@ -49,7 +49,7 @@ module Components
     end
 
     def event_text(event)
-      event.start.date_time.strftime('%H:%M ') +
+      event.start.date_time.strftime('%H:%M | ') +
         event.summary
     end
   end
