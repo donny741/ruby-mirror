@@ -34,7 +34,7 @@ module Components
                                  y: opts[:y] + y_offset + 1.vh)
           y_offset += 8.vh
         when Object
-          list_items << Text.new(event.summary,
+          list_items << Text.new(event_text(event),
                                  size: 3.vh,
                                  color: 'white',
                                  x: opts[:x],
@@ -45,7 +45,12 @@ module Components
     end
 
     def event_groups
-      Components::Calendars::Parse.get_upcomming_events
+      Components::Calendars::Parse.get_upcomming_events_for(opts[:calendar_id])
+    end
+
+    def event_text(event)
+      event.start.date_time.strftime('%H:%M ') +
+        event.summary
     end
   end
 end

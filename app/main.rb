@@ -31,6 +31,7 @@ COMPONENTS = [
     options: {
       update_interval: 11_520,
       play_with_fire: true,
+      calendar_id: ENV['CALENDAR_ID'],
       y_offset: 2.vh
     }.merge!(GRID.start_cell(x: 2, y: 3))
   },

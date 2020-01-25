@@ -1,3 +1,4 @@
 app/assets/fonts/maison.otf
 app/config/googles/*.json
 app/config/googles/*.yaml
+Gemfile.lock

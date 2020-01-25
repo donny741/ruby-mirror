@@ -5,14 +5,21 @@ module Components
     module Parse
       module_function
 
-      CALENDAR_ID = 'donatas.povilaitis@vinted.com'
-      # CALENDAR_ID = 'friendlyfashion.co.uk_9f8sco84m2tkl1rfr715go6hug@group.calendar.google.com'
+      WDAYS_TO_MAX_DAYS = {
+        0 => 7,
+        1 => 6,
+        2 => 5,
+        3 => 4,
+        4 => 3,
+        5 => 9, # showing next week's
+        6 => 8  # events from friday
+      }.freeze
 
-      def get_upcomming_events
+      def get_upcomming_events_for(calendar_id)
         service = Google::Apis::CalendarV3::CalendarService.new
         service.authorization = Googles.get_authorizer
 
-        events = service.list_events(CALENDAR_ID,
+        events = service.list_events(calendar_id,
                                      single_events: true,
                                      order_by: 'startTime',
                                      time_min: DateTime.now.rfc3339,
@@ -35,11 +42,7 @@ module Components
       end
 
       def time_max
-        if Date.today.saturday? || Date.today.sunday?
-          Date.today.next_week.end_of_week
-        else
-          Date.today.end_of_week
-        end
+        Date.today + WDAYS_TO_MAX_DAYS[Date.today.wday]
       end
     end
   end
