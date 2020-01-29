@@ -2,27 +2,38 @@
 
 module Components
   class Weather < Components::BaseComponent
+
+    TEXT_OBJECTS = %i[state feels_like wind].freeze
+
     def update
       @weather = weather_info
       temp_object.text = temperature_description
 
-      state_object.remove
-      wind_object.remove
-      feels_like_object.remove
-
-      state_object.text = state_description
-      state_object.x = opts[:x] + temp_object.width + 1.vh
-      feels_like_object.text = feels_like_description
-      feels_like_object.x = opts[:x] + temp_object.width + 1.2.vh
-      wind_object.text = wind_description
-      wind_object.x = opts[:x] + temp_object.width + 1.2.vh
-
-      state_object.add
-      wind_object.add
-      feels_like_object.add
+      TEXT_OBJECTS.each(&method(:remove_text_object))
+      state_object.x = right_from_temp_obj_aligned_left(1.vh)
+      feels_like_object.x = right_from_temp_obj_aligned_left(1.2.vh)
+      wind_object.x = right_from_temp_obj_aligned_left(1.2.vh)
+      TEXT_OBJECTS.each(&method(:change_description))
+      TEXT_OBJECTS.each(&method(:add_text_object))
     end
 
     private
+
+    def remove_text_object(object_name)
+      send("#{object_name}_object", &:remove)
+    end
+
+    def change_description(object_name)
+      send("#{object_name}_object").text = send("#{object_name}_description")
+    end
+
+    def add_text_object(object_name)
+      send("#{object_name}_object", &:add)
+    end
+
+    def right_from_temp_obj_aligned_left(offset)
+      opts[:x] + temp_object.width + offset
+    end
 
     def temp_object
       @temp_object ||= Text.new('',

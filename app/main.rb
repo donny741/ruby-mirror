@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './components/base_component'
-Dir[Dir.pwd + '/**/*.rb'].each { |f| require f }
+Dir[Dir.pwd + '/**/*.rb'].sort.each { |f| require f }
 
 RESOLUTION = Resolution.new(scale: SCALE)
 GRID = Grid.new(x: RESOLUTION.width,
