@@ -9,6 +9,14 @@ GRID = Grid.new(x: RESOLUTION.width,
                 rows: 12,
                 cols: 12)
 
+set title: 'Ruby Mirror',
+    background: '#000000',
+    fullscreen: false,
+    height: RESOLUTION.height,
+    width: RESOLUTION.width,
+    resizeable: false,
+    diagnostics: true
+
 COMPONENTS = [
   {
     class: 'CurrentTime',
@@ -62,14 +70,6 @@ COMPONENTS = [
     }
   }
 ].freeze
-
-set title: 'Ruby Mirror',
-    background: '#000000',
-    fullscreen: false,
-    height: RESOLUTION.height,
-    width: RESOLUTION.width,
-    resizeable: false,
-    diagnostics: true
 
 components = Components.load
 

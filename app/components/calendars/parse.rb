@@ -5,7 +5,7 @@ module Components
     module Parse
       module_function
 
-      WDAYS_TO_MAX_DAYS = {
+      WDAYS_OFFSET = {
         0 => 7,
         1 => 6,
         2 => 5,
@@ -42,7 +42,7 @@ module Components
       end
 
       def time_max
-        Date.today + WDAYS_TO_MAX_DAYS[Date.today.wday]
+        Date.today + 9
       end
     end
   end
