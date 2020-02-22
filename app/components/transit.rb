@@ -30,34 +30,29 @@ module Components
     end
 
     def remove(item)
-      # you can't remove items from @list_items because the fire will spread
-      item.send opts[:play_with_fire] ? :remove_and_free_text : :remove
+      # you can't remove items from @list_items because I implemented it poorly
+      if opts[:play_with_fire] && item.respond_to?(:remove_and_free_text)
+        return item.send :remove_and_free_text
+      end
+
+      item.remove
     end
 
     def draw_list
       y_offset = opts[:y_offset] || 0
       @routes.each do |route|
-        list_items << Text.new(
-          route[:destination],
-          size: 2.5.vh,
-          color: 'white',
-          x: opts[:x],
-          y: opts[:y] + y_offset + 1.vh
-        )
-        y_offset += 4.vh
         add_bus_objects(route, y_offset)
-        y_offset += 2.vh
+        y_offset += 4.vh
       end
     end
 
     def add_bus_objects(route, y_offset)
       route[:buses].each do |bus|
-        list_items << Text.new(
-          "#{bus[:short_name]} in #{format_time(bus[:departure_time])} min.",
-          size: 1.5.vh,
+        list_items.push(*Transits::BusRow.for(
+          bus,
           x: opts[:x],
           y: opts[:y] + y_offset
-        )
+        ))
         y_offset += 3.5.vh
       end
     end
