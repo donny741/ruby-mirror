@@ -2,7 +2,6 @@
 
 module Components
   class Weather < Components::BaseComponent
-
     TEXT_OBJECTS = %i[state feels_like wind].freeze
 
     def update

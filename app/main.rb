@@ -54,6 +54,21 @@ COMPONENTS = [
     }.merge!(GRID.start_cell(x: 9, y: 2))
   },
   {
+    class: 'Transit',
+    disabled: false,
+    options: {
+      update_interval: 360,
+      play_with_fire: true,
+      key: GOOGLE_API_KEY,
+      origin: 'Fabijoniškių žiedas',
+      destinations: [
+        'Zirmunu g. 70',
+        'VU MF'
+      ],
+      country_code: 'lt'
+    }.merge!(GRID.start_cell(x: 9, y: 3.2))
+  },
+  {
     class: 'List',
     disabled: true,
     options: {
