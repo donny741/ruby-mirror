@@ -46,14 +46,14 @@ module Components
         )
         y_offset += 4.vh
         add_bus_objects(route, y_offset)
-        y_offset += 4.vh
+        y_offset += 2.vh
       end
     end
 
     def add_bus_objects(route, y_offset)
       route[:buses].each do |bus|
         list_items << Text.new(
-          "#{bus[:short_name]} in #{format_time(bus[:departure_time])} minutes",
+          "#{bus[:short_name]} in #{format_time(bus[:departure_time])} min.",
           size: 1.5.vh,
           x: opts[:x],
           y: opts[:y] + y_offset

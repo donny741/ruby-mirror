@@ -63,7 +63,8 @@ COMPONENTS = [
       origin: 'Fabijoniškių žiedas',
       destinations: [
         'Zirmunu g. 70',
-        'VU MF'
+        'VU MF',
+        'VUL SK'
       ],
       country_code: 'lt'
     }.merge!(GRID.start_cell(x: 9, y: 3.2))
