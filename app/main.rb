@@ -22,7 +22,7 @@ COMPONENTS = [
     class: 'CurrentTime',
     disabled: false,
     options: {
-      update_interval: 10,
+      update_interval: 5,
     }.merge!(GRID.start_cell(x: 2, y: 2))
   },
   {
@@ -67,7 +67,7 @@ COMPONENTS = [
         'VUL SK'
       ],
       country_code: 'lt'
-    }.merge!(GRID.start_cell(x: 9, y: 3.2))
+    }.merge!(GRID.start_cell(x: 9.3, y: 3.1))
   },
   {
     class: 'List',

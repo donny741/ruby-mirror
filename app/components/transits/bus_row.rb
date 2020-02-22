@@ -55,7 +55,7 @@ module Components::Transits
 
     def minutes_left
       time = ((bus[:departure_time] - Time.now) / 60).floor
-      return 0 if time.negative?
+      time = 0 if time.negative?
 
       "  in #{time} min."
     end
