@@ -23,7 +23,7 @@ module Components::Transits
 
     def find_first_bus(route)
       bus_step = route.dig(:legs, 0, :steps)
-                      .filter { |step| step[:travel_mode] == 'TRANSIT' }
+                      .select { |step| step[:travel_mode] == 'TRANSIT' }
                       .first
       bus_details = bus_step.dig(:transit_details, :line)
                             .slice(:short_name, :color, :vehicle, :text_color)
