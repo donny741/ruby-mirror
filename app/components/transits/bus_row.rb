@@ -24,7 +24,7 @@ module Components::Transits
       colored_box_object(text_object.width, text_object.width)
       append_time_to_text
 
-      [text_object, @colored_box_object]
+      [text_object] + @colored_box_object
     end
 
     private
@@ -39,12 +39,11 @@ module Components::Transits
     end
 
     def colored_box_object(width, height)
-      @colored_box_object ||= Rectangle.new(
-        x: x - HORIZONTAL_PADDING,
-        y: y - VERTICAL_PADDING,
-        z: -1,
-        width: width + 2 * HORIZONTAL_PADDING,
-        height: height + 2 * VERTICAL_PADDING,
+      @colored_box_object ||= Components::Transits::RectWithRadius.for(
+        width: width,
+        height: height,
+        x: x,
+        y: y,
         color: bus[:color]
       )
     end

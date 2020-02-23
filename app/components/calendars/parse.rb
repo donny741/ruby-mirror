@@ -35,14 +35,14 @@ module Components
                          when (Date.today + 1).to_s
                            'Tomorrow'
                          else
-                           event_group[0]
+                           Date.parse(event_group[0]).strftime('%A, %b %d')
                          end
 
         event_group
       end
 
       def time_max
-        Date.today + 9
+        Date.today + WDAYS_OFFSET[Date.today.wday]
       end
     end
   end
