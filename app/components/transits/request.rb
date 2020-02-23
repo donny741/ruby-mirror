@@ -18,7 +18,7 @@ module Components::Transits
         routes = response.dig(:routes)
         p "Found #{routes.size} routes for #{destination}"
         { buses: routes.map(&method(:find_first_bus)), destination: destination }
-      end
+      end.sort_by { |route| route[:buses].first[:departure_time] }
     end
 
     def find_first_bus(route)
