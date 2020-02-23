@@ -60,14 +60,14 @@ COMPONENTS = [
       update_interval: 360,
       play_with_fire: true,
       key: GOOGLE_API_KEY,
-      origin: 'Fabijoniškių žiedas',
+      origin: 'Fabijoniskiu ziedas',
       destinations: [
-        'Zirmunu g. 70',
+        'Zirmunu g 70',
         'VU MF',
-        'VUL SK'
+        'Zalieji ezerai',
       ],
       country_code: 'lt'
-    }.merge!(GRID.start_cell(x: 9.3, y: 3.1))
+    }.merge!(GRID.start_cell(x: 11.6, y: 3.1))
   },
   {
     class: 'List',

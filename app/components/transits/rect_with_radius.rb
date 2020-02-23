@@ -4,7 +4,7 @@ module Components::Transits
   class RectWithRadius
     attr_reader :opts
 
-    PADDING = 1.vw
+    PADDING = 0.7.vw
 
     def self.for(opts)
       new(opts).run

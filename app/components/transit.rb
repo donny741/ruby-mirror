@@ -42,7 +42,7 @@ module Components
       y_offset = opts[:y_offset] || 0
       @routes.each do |route|
         add_bus_objects(route, y_offset)
-        y_offset += 4.vh
+        y_offset += 4.5.vh
       end
     end
 
