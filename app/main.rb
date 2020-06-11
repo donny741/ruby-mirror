@@ -55,7 +55,7 @@ COMPONENTS = [
   },
   {
     class: 'Transit',
-    disabled: false,
+    disabled: true,
     options: {
       update_interval: 360,
       play_with_fire: true,
